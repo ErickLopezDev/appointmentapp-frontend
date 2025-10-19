@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Apply border-box to all elements */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100vh;
+    width: 100vw;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.card {
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+.flex-justify-center {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+table {
+    width: 100%;
+    border: 1px solid #000000 !important;
+}
+
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.widhtfull {
+    width: 100%;
+}
