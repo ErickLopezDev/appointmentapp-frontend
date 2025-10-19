@@ -66,15 +66,15 @@ export class SaveProduct implements OnInit {
         this._productService.getProductById(this.idParameter).subscribe({
           next: (data) => {
             this.form.patchValue({
-              name: data.name,
-              description: data.description,
-              presentation: data.presentation,
-              unitPrice: data.unitPrice || 0,
-              stock: data.stock,
-              expired: data.expired,
-              category: data.category,
-              family: data.family,
-              laboratory: data.laboratory,
+              name: data.productName,
+              description: data.productDescription,
+              presentation: data.productPresentation,
+              unitPrice: data.productUnitPrice,
+              stock: data.productStock,
+              expired: data.productExpired,
+              category: data.idCategory,
+              family: data.idFamily,
+              laboratory: data.idLaboratory,
             });
           }
         })
@@ -114,15 +114,15 @@ export class SaveProduct implements OnInit {
     if (this.form.invalid || this.idParameter === null) return;
     const product: IProduct = {
       idProduct: this.idParameter,
-      name: this.form.value.name!,
-      description: this.form.value.description!,
-      presentation: this.form.value.presentation!,
-      unitPrice: this.form.value.unitPrice!,
-      stock: this.form.value.stock!,
-      expired: this.form.value.expired!,
-      category: this.form.value.category!,
-      family: this.form.value.family!,
-      laboratory: this.form.value.laboratory!,
+      productName: this.form.value.name!,
+      productDescription: this.form.value.description!,
+      productPresentation: this.form.value.presentation!,
+      productUnitPrice: this.form.value.unitPrice!,
+      productStock: this.form.value.stock!,
+      productExpired: this.form.value.expired!,
+      idCategory: this.form.value.category!,
+      idFamily: this.form.value.family!,
+      idLaboratory: this.form.value.laboratory!,
     };
     this._productService.updateProduct(product).subscribe({
       next: (data) => {
@@ -136,24 +136,27 @@ export class SaveProduct implements OnInit {
   saveProduct(): void {
     if (this.form.invalid) return;
 
-    const product: IProduct = {
-      name: this.form.value.name!,
-      description: this.form.value.description!,
-      presentation: this.form.value.presentation!,
-      unitPrice: this.form.value.unitPrice!,
-      stock: this.form.value.stock!,
-      expired: this.form.value.expired!,
-      category: this.form.value.category!,
-      family: this.form.value.family!,
-      laboratory: this.form.value.laboratory!,
-    };
+    if (this.idParameter == null) {
+      const product: IProduct = {
+        productName: this.form.value.name!,
+        productDescription: this.form.value.description!,
+        productPresentation: this.form.value.presentation!,
+        productUnitPrice: this.form.value.unitPrice!,
+        productStock: this.form.value.stock!,
+        productExpired: this.form.value.expired!,
+        idCategory: this.form.value.category!,
+        idFamily: this.form.value.family!,
+        idLaboratory: this.form.value.laboratory!,
+      };
 
-    this._productService.saveProduct(product).subscribe({
-      next: (data) => {
-        this._router.navigate(['/']);
-      }
-    })
-
+      this._productService.saveProduct(product).subscribe({
+        next: (data) => {
+          this._router.navigate(['/']);
+        }
+      })
+    } else {
+      this.updateProduct();
+    }
   }
 
 }

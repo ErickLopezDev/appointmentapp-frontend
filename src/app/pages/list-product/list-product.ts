@@ -19,7 +19,7 @@ export class ListProduct implements OnInit {
   private _productService: ProductService = inject(ProductService);
   readonly dialog = inject(MatDialog);
 
-  displayedColumns: string[] = ['idProduct', 'name', 'description', 'presentation', 'unitPrice', 'stock', 'expired', 'category', 'family', 'laboratory', 'actions'];
+  displayedColumns: string[] = ['idProduct', 'productName', 'productDescription', 'productPresentation', 'productUnitPrice', 'productStock', 'productExpired', 'idCategory', 'idFamily', 'idLaboratory', 'actions'];
   patients: IProduct[] = []
 
   constructor() {
@@ -31,10 +31,16 @@ export class ListProduct implements OnInit {
   }
 
   openDialog(product: IProduct): void {
-    this.dialog.open(DeleteProductDialog, {
+    const dialogRef = this.dialog.open(DeleteProductDialog, {
       width: '250px',
       data: product
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadPatient();
+      }
+    })
   }
 
   loadPatient() {

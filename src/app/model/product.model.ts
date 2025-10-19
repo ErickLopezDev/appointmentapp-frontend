@@ -1,12 +1,12 @@
 export interface IProduct {
     idProduct?: number;
-    name: string;
-    description: string;
-    presentation: string;
-    unitPrice: number;
-    stock: number;
-    expired: string;
-    category: number;
-    family: number;
-    laboratory: number;
+    productName: string;
+    productDescription: string;
+    productPresentation: string;
+    productUnitPrice: number;
+    productStock: number;
+    productExpired: string;
+    idCategory: number;
+    idFamily: number;
+    idLaboratory: number;
 }
