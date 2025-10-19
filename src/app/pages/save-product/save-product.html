@@ -1,0 +1,110 @@
+<div class="flex-justify-center">
+    <section class="card">
+
+        @if(idParameter == null) {
+            <h1 style="text-align: center;">Crear Producto</h1>
+        } @else {
+            <h1 style="text-align: center;">Actualizar Producto</h1>
+        }
+
+        <form class="form" [formGroup]="form">
+
+            <mat-form-field class="widhtfull">
+                <mat-label>Nombre</mat-label>
+                <input matInput type="text" formControlName="name">
+                @if (form.get('name')?.invalid) {
+                    <mat-error>Nombre <strong>es obligatorio</strong></mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="widhtfull">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+                @if(form.get('description')?.invalid) {
+                    <mat-error>Descripción es <strong>obligatorio</strong></mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="widhtfull">
+                <mat-label>Presentación</mat-label>
+                <input matInput type="text" formControlName="presentation">
+                @if(form.get('presentation')?.invalid) {
+                    <mat-error>Presentación es <strong>obligatorio</strong></mat-error>
+                }
+            </mat-form-field>
+
+            <div class="flex-justify-center">
+                <mat-form-field class="widhtfull">
+                    <mat-label>Precio de unidad</mat-label>
+                    <input matInput type="text" formControlName="unitPrice">
+                    @if (form.get('unitPrice')?.invalid) {
+                        <mat-error>Precio es <strong>obligatorio</strong></mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field class="widhtfull">
+                    <mat-label>Cantidad</mat-label>
+                    <input matInput type="text" formControlName="stock">
+                    @if (form.get('stock')?.invalid) {
+                        <mat-error>Cantidad es <strong>obligatoria</strong></mat-error>
+                    }
+                </mat-form-field>
+            </div>
+
+            <mat-form-field class="widhtfull">
+                <mat-label>Fecha de vencimiento</mat-label>
+                <input matInput [matDatepicker]="datepicker" formControlName="expired" />
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker>
+                    <mat-datepicker-actions>
+                        <button matButton matDatepickerCancel>Cancelar</button>
+                        <button matButton="elevated" matDatepickerApply>Aceptar</button>
+                    </mat-datepicker-actions>
+                </mat-datepicker>
+                @if (form.get('stock')?.invalid) {
+                    <mat-error>La fecha es <strong>obligatoria</strong></mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="widhtfull">
+                <mat-label>Categoria</mat-label>
+                <mat-select formControlName="category">
+                    @for (category of categories; track $index) {
+                        <mat-option [value]="category.idCategory">{{category.name}}</mat-option>
+                    }
+                </mat-select>
+                @if (form.get('stock')?.invalid) {
+                    <mat-error>Categoria es <strong>obligatoria</strong></mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="widhtfull">
+                <mat-label>Familia</mat-label>
+                <mat-select formControlName="family">
+                    @for (family of families; track $index) {
+                        <mat-option [value]="family.idFamily">{{family.name}}</mat-option>
+                    }
+                </mat-select>
+                @if (form.get('stock')?.invalid) {
+                    <mat-error>Familia es <strong>obligatoria</strong></mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="widhtfull">
+                <mat-label>Laboratorio</mat-label>
+                <mat-select formControlName="laboratory">
+                    @for (laboratory of laboratories; track $index) {
+                        <mat-option [value]="laboratory.idLaboratory">{{laboratory.name}}</mat-option>
+                    }
+                </mat-select>
+                @if (form.get('stock')?.invalid) {
+                    <mat-error>Laboratorio es <strong>obligatorio</strong></mat-error>
+                }
+            </mat-form-field>
+
+            <button [disabled]="form.invalid" matButton="elevated" type="button"
+                (click)="saveProduct()">Guardar</button>
+
+        </form>
+    </section>
+</div>
